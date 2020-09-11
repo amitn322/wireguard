@@ -1,0 +1,11 @@
+[Unit]
+Description=Wireguard Logging Service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/bin/sh /etc/wireguard/wireguard-logging.sh
+
+[Install]
+WantedBy=multi-user.target
