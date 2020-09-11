@@ -3,7 +3,7 @@
 threshold=120 # 5 minutes in seconds.. anything below that means user connected, anything above means disconnected.
 connection_info_file=/var/log/wireguard/connected_clients.info
 log_file=/var/log/wireguard/wireguard.log
-echo "Wireguard Logging Service Started" >> /var/log/wireguard-logging.log
+echo "`date` -- Wireguard Logging Service Started" >> /var/log/wireguard-logging.log
 while [ 1 ]
 do
         wgout=`wg | grep -B 3 second`
