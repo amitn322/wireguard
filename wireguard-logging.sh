@@ -4,6 +4,7 @@ threshold=120 # 5 minutes in seconds.. anything below that means user connected,
 connection_info_file=/var/log/wireguard/connected_clients.info
 log_file=/var/log/wireguard/wireguard.log
 echo "`date` -- Wireguard Logging Service Started" >> /var/log/wireguard-logging.log
+mkdir -p /var/log/wireguard/
 while [ 1 ]
 do
         wgout=`wg | grep -B 3 second`
@@ -48,4 +49,6 @@ do
                 fi
                 done
         fi
-        sleep 5
+        sleep 30
+
+done

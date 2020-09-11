@@ -1,12 +1,12 @@
 #!/bin/bash
-SERVER_IP=home.amitnepal.com
-LISTEN_PORT=51999
-DNS_SERVERS="192.168.23.29 , 192.168.100.254"
-SERVER_PUBLIC_KEY="uyVIRsLSx7wgyIQvfDisbkJuGb3gbmTuDUv6pAWoHhY="
+SERVER_IP=YOUR_SERVER_IP
+LISTEN_PORT=YOUR_WIREGUARD_LISTEN_PORT
+DNS_SERVERS="DNS_IP_1 , DNS_IP_2"
+SERVER_PUBLIC_KEY="SERVER_PUBLIC_KEY"
 PUSH_ROUTE_ALL="0.0.0.0/0, ::/0"
-PUSH_ROUTE_INTRANET="192.168.100.0/24, 192.168.23.0/24"
+PUSH_ROUTE_INTRANET="192.168.x.0/24, 192.168.x.0/24"
 SERVER_CONFIG='wg0.conf'
-IP_RANGE='192.168.77.1 and 192.168.77.253'
+IP_RANGE='192.168.x.1 and 192.168.x.253'
 read -p "Enter Client Name:" client_name_temp
 read -p "Push All Routes ? If not only Intranet will be routed (y/n):" confirmRoutes
 echo "What do you want the client IP to be,must be between ${IP_RANGE} ?:"
