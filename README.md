@@ -26,6 +26,7 @@ PUSH_ROUTE_INTRANET="192.168.x.0/24, 192.168.x.0/24"
 SERVER_CONFIG='wg0.conf'
 IP_RANGE='192.168.x.1 and 192.168.x.253'
 ```
+- Update the `notify_by_email` and `notification_email` in `wireguard-logging.sh` to get email notifications.
 - To Manage Clients Run the Create Client Script
 ```bash
 ./create_client.sh
