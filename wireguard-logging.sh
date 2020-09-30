@@ -78,6 +78,10 @@ do
                         durationMessage+="$seconds second(s) ago"
                 fi
 
+                if [ -z $seconds ];then
+                    continue
+                fi
+
                 duration=$((hour_seconds + minute_seconds + second_seconds))
                 user=`grep -irl ${peer} /etc/wireguard/clients/ | awk -F'/' {'print $5'}`
                 #echo "User: $user , Duration: $duration, Peer: $peer, IP: $endpoint, Threshold: $threshold"

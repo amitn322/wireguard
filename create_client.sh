@@ -68,3 +68,4 @@ echo "######################################################"
 cat ${destination_file}.conf
 
 systemctl restart wg-quick@wg0
+systemctl restart wireguard-logging
