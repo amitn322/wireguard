@@ -83,7 +83,7 @@ do
                         continue=false
                 fi
 
-                if [ $continue ];then
+                if [ $continue == "true" ];then
                     continue
                 fi
 
