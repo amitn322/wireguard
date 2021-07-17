@@ -59,23 +59,32 @@ do
                 seconds=`echo $word | grep -oE "[0-9]{1,2} second" | awk {'print $1'}`
                 #endpoint=`echo $word  | awk -F' |:' {'print $6'}`
                 durationMessage=''
+                continue=true
                 if [ ! -z $days ];then
                         day_seconds=$(($days*24*60*60*60))
                         durationMessage+="$days Day(s),"
+                        continue=false
                 fi
                 if [ ! -z $hours ];then
                         hour_seconds=$((hours*60*60))
                         durationMessage+="$hours Hour(s), "
+                        continue=false
                 fi
 
                 if [ ! -z $minutes ];then
                         minute_seconds=$((minutes*60))
                         durationMessage+="$minutes minute(s), "
+                        continue=false
                 fi
 
                 if [ ! -z $seconds ];then
                         second_seconds=$((seconds))
                         durationMessage+="$seconds second(s) ago"
+                        continue=false
+                fi
+
+                if [ $continue == "true" ];then
+                    continue
                 fi
 
                 duration=$((hour_seconds + minute_seconds + second_seconds))
