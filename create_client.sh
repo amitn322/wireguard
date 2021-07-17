@@ -28,10 +28,12 @@ client_name=`echo ${client_name_temp} | sed 's/ /-/g'`
 mkdir -p ./clients/${client_name}
 destination_file=./clients/${client_name}/${client_name}
 private_key=`wg genkey`
+preshared_key=`wg genpsk`
 public_key=`echo ${private_key} | wg pubkey`
 
 echo "${private_key}" >> ${destination_file}-priv.key
 echo "${public_key}" >> ${destination_file}-pub.key
+echo "${preshared_key}" >> ${destination_file}-psk.key
 
 # create client config
 echo "Creating Client Config"
@@ -40,6 +42,7 @@ cat <<EOF > ${destination_file}.conf
 [Interface]
 Address = ${clientIP}/24
 PrivateKey = ${private_key}
+PresharedKey = ${preshared_key}
 DNS = ${DNS_SERVERS}
 
 [Peer]
