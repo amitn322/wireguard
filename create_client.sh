@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# personal configuration
 SERVER_IP=YOUR_SERVER_IP
 LISTEN_PORT=YOUR_WIREGUARD_LISTEN_PORT
 DNS_SERVERS="DNS_IP_1 , DNS_IP_2"
@@ -7,6 +9,14 @@ PUSH_ROUTE_ALL="0.0.0.0/0, ::/0"
 PUSH_ROUTE_INTRANET="192.168.x.0/24, 192.168.x.0/24"
 SERVER_CONFIG='wg0.conf'
 IP_RANGE='192.168.x.1 and 192.168.x.253'
+
+# modifying network interfaces and taking them up and down requires super user privlages, are we running as root?
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root"
+   exit 1
+fi
+
+# prompt for client config params
 read -p "Enter Client Name:" client_name_temp
 read -p "Push All Routes ? If not only Intranet will be routed (y/n):" confirmRoutes
 echo "What do you want the client IP to be,must be between ${IP_RANGE} ?:"
