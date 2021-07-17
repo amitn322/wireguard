@@ -3,7 +3,7 @@
 # personal configuration
 SERVER_IP=YOUR_SERVER_IP
 LISTEN_PORT=YOUR_WIREGUARD_LISTEN_PORT
-DNS_SERVERS="DNS_IP_1 , DNS_IP_2"
+DNS_SERVERS="DNS_IP_1, DNS_IP_2"
 SERVER_PUBLIC_KEY="SERVER_PUBLIC_KEY"
 PUSH_ROUTE_ALL="0.0.0.0/0, ::/0"
 PUSH_ROUTE_INTRANET="192.168.x.0/24, 192.168.x.0/24"
@@ -50,13 +50,14 @@ echo "Creating Client Config"
 
 cat <<EOF > ${destination_file}.conf
 [Interface]
-Address = ${clientIP}/24
 PrivateKey = ${private_key}
-PresharedKey = ${preshared_key}
+Address = ${clientIP}/24
+ListenPort = ${LISTEN_PORT}
 DNS = ${DNS_SERVERS}
 
 [Peer]
 PublicKey = ${SERVER_PUBLIC_KEY}
+PresharedKey = ${preshared_key}
 AllowedIPs = ${PUSH_ROUTE}
 Endpoint = ${SERVER_IP}:${LISTEN_PORT}
 EOF
@@ -70,6 +71,7 @@ cat << EOF >> ${SERVER_CONFIG}
 #${client_name}
 [Peer]
 PublicKey = ${public_key}
+PresharedKey = ${preshared_key}
 AllowedIPs = ${clientIP}/32
 EOF
 
