@@ -103,7 +103,7 @@ do
                         fi
                 elif [ $duration -gt $threshold ];then
                         touch ${connection_info_file} ${log_file}
-                        grep -i $user[[:space:]] ${connection_info_file}
+                        grep -i $user[[:space:]] ${connection_info_file} >> /dev/null
                         if [ $? -eq 0 ];then
                                 sed -i "/$user/d" ${connection_info_file}
                                 echo "`date` - User $user $endpoint  disconnected $durationMessage" >> ${log_file}
