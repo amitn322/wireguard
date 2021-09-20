@@ -107,7 +107,9 @@ do
                         if [ $? -eq 0 ];then
                                 sed -i "/$user/d" ${connection_info_file}
                                 echo "`date` - User $user $endpoint  disconnected $durationMessage" >> ${log_file}
-                                notify "$user" "$endpoint" "$durationMessage" "Disconnected"
+                                if [ "$notify_by_email" == "yes" ];then
+                                	notify "$user" "$endpoint" "$durationMessage" "Disconnected"
+                                fi
 
                         fi
                 fi
