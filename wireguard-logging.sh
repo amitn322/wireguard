@@ -51,8 +51,8 @@ do
                 #echo "-------------------------------------------"
                 #echo "word: $word"
                 #echo "-------------------------------------------"
-                endpoint=`echo $word | grep -o 'endpoint:\s\+\S*\W' | awk -F':' {'print $2'}`
-                peer=`echo $word | grep -o 'peer:\s\+\S*\W' | awk -F':' {'print $2'}`
+                endpoint=`echo $word | grep -o 'endpoint:\s\+\S*\W' | awk -F':' {'print $2'} | tr -d ' '`
+                peer=`echo $word | grep -o 'peer:\s\+\S*\W' | awk -F':' {'print $2'} | tr -d ' '`
                 days=`echo $word | grep -oE "[0-9]{1,3} day" | awk {'print $1'}`
                 hours=`echo $word | grep -oE "[0-9]{1,2} hour" | awk {'print $1'}`
                 minutes=`echo $word | grep -oE "[0-9]{1,2} minute" | awk {'print $1'}`
