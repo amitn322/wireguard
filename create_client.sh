@@ -23,6 +23,11 @@ echo "What do you want the client IP to be,must be between ${IP_RANGE} ?:"
 echo "These Ips are already used:"
 grep AllowedIPs ${SERVER_CONFIG}
 read -p "Enter client IP you want to assign:" clientIP
+read -p "Use PersistentKeepalive in client config? (y/n):" useKeepalive
+if [ "${useKeepalive}" == 'y' ]; then
+        read -p "Keepalive interval in seconds (blank for default of 25):" keepaliveSecs
+        keepaliveSecs="${keepaliveSecs:=25}"
+fi
 
 if [ "${confirmRoutes}" == 'y' ];then
         PUSH_ROUTE=${PUSH_ROUTE_ALL}
@@ -61,6 +66,11 @@ PresharedKey = ${preshared_key}
 AllowedIPs = ${PUSH_ROUTE}
 Endpoint = ${SERVER_IP}:${LISTEN_PORT}
 EOF
+
+# Append PersistentKeepalive to client config if enabled
+if [ "${useKeepalive}" == 'y' ]; then
+        echo "PersistentKeepalive = ${keepaliveSecs}" >> ${destination_file}.conf
+fi
 
 # append config to server
 systemctl stop wg-quick@wg0
