@@ -87,7 +87,7 @@ do
                     continue
                 fi
 
-                duration=$((hour_seconds + minute_seconds + second_seconds))
+                duration=$((day_seconds + hour_seconds + minute_seconds + second_seconds))
                 user=`grep -rl ${peer} /etc/wireguard/clients/ | awk -F'/' {'print $5'}`
                 #echo "User: $user , Duration: $duration, Peer: $peer, IP: $endpoint, Threshold: $threshold"
                 if [ $duration -le $threshold ];then
